@@ -96,7 +96,8 @@ function s:exist_gitui()
 endfunction
 
 function s:git_root_dir() abort
-  return trim(system('git rev-parse --show-toplevel'))
+  let cwd = fnamemodify(expand('%:p'), ':h')
+  return trim(system(printf('cd "%s" && git rev-parse --show-toplevel', cwd)))
 endfunction
 
 function s:is_git_dir(dir)
